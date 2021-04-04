@@ -1,11 +1,10 @@
 package com.wutsi.telegram.t
 
-import com.wutsi.blog.channel.service.telegram.SendMessageResponse
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 
 @Service
-class TelegramApi(
+class TelegramClient(
     private val rest: RestTemplate = RestTemplate()
 ) {
     fun sendMessage(

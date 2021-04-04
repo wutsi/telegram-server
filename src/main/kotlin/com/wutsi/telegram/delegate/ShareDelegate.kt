@@ -5,16 +5,15 @@ import com.wutsi.site.dto.Site
 import com.wutsi.story.StoryApi
 import com.wutsi.story.dto.Story
 import com.wutsi.telegram.AttributeUrn
-import com.wutsi.telegram.t.TelegramApi
+import com.wutsi.telegram.t.TelegramClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import kotlin.Long
 
 @Service
 public class ShareDelegate(
     @Autowired private val siteApi: SiteApi,
     @Autowired private val storyApi: StoryApi,
-    @Autowired private val telegramApi: TelegramApi
+    @Autowired private val telegram: TelegramClient
 ) {
     public fun invoke(storyId: Long) {
         val story = storyApi.get(storyId).story
@@ -26,12 +25,12 @@ public class ShareDelegate(
         val chatId = chatId(site)
         if (token != null && chatId != null) {
             val text = text(story, site)
-            telegramApi.sendMessage(text, chatId, token)
+            telegram.sendMessage(text, chatId, token)
         }
     }
 
     private fun text(story: Story, site: Site): String =
-        "${story.title} ${site.websiteUrl}?utm_source=telegram"
+        "${story.title} ${site.websiteUrl}${story.slug}?utm_source=telegram"
 
     private fun supportsTelegram(site: Site): Boolean =
         site.attributes.find { AttributeUrn.ENABLED.urn == it.urn }?.value == "true"

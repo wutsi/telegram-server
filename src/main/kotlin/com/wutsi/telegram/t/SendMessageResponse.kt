@@ -1,6 +1,4 @@
-package com.wutsi.blog.channel.service.telegram
-
-import com.wutsi.blog.channel.service.telegram.model.Message
+package com.wutsi.telegram.t
 
 data class SendMessageResponse(
     val ok: Boolean = false,

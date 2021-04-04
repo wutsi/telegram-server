@@ -1,4 +1,4 @@
-package com.wutsi.blog.channel.service.telegram.model
+package com.wutsi.telegram.t
 
 data class Message(
     val message_id: Long = -1,
