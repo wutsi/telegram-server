@@ -1,11 +1,15 @@
 [![](https://github.com/wutsi/telegram-server/actions/workflows/master.yml/badge.svg)](https://github.com/wutsi/telegram-server/actions/workflows/master.yml)
 [![](https://github.com/wutsi/telegram-server/actions/workflows/pull_request.yml/badge.svg)](https://github.com/wutsi/telegram-server/actions/workflows/pull_request.yml)
+[![](https://github.com/wutsi/telegram-server/actions/workflows/scheduled_run.yml/badge.svg)](https://github.com/wutsi/telegram-server/actions/workflows/scheduled_run.yml)
 
 [![JDK](https://img.shields.io/badge/jdk-11-brightgreen.svg)](https://jdk.java.net/11/)
 [![](https://img.shields.io/badge/maven-3.6-brightgreen.svg)](https://maven.apache.org/download.cgi)
 ![](https://img.shields.io/badge/language-kotlin-blue.svg)
 
 Wutsi Plugin for sharing stories on [Telegram](https://www.telegram.com).
+
+This plugin listens to the following events:
+  - `urn:event:wutsi:story:published`: When this event is received, this plugin share the story published to the site's default telegram channel or group.
 
 # Installation Prerequisites
 ## Database Setup
