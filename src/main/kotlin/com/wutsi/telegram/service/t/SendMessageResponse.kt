@@ -1,4 +1,4 @@
-package com.wutsi.telegram.t
+package com.wutsi.telegram.service.t
 
 data class SendMessageResponse(
     val ok: Boolean = false,

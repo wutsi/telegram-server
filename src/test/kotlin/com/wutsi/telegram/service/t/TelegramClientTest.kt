@@ -1,4 +1,4 @@
-package com.wutsi.telegram.t
+package com.wutsi.telegram.service.t
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.eq

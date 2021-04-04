@@ -2,7 +2,6 @@ package com.wutsi.telegram.endpoint
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -15,9 +14,10 @@ import com.wutsi.story.dto.GetStoryResponse
 import com.wutsi.story.dto.Story
 import com.wutsi.telegram.AttributeUrn
 import com.wutsi.telegram.dao.ShareRepository
-import com.wutsi.telegram.t.Message
-import com.wutsi.telegram.t.SendMessageResponse
-import com.wutsi.telegram.t.TelegramClient
+import com.wutsi.telegram.service.bitly.BitlyUrlShortener
+import com.wutsi.telegram.service.t.Message
+import com.wutsi.telegram.service.t.SendMessageResponse
+import com.wutsi.telegram.service.t.TelegramClient
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -53,9 +53,16 @@ internal class ShareControllerTest {
     @MockBean
     private lateinit var telegramClient: TelegramClient
 
+    @MockBean
+    private lateinit var bitly: BitlyUrlShortener
+
+    private val shortenUrl = "https://bit.ly/123"
+
     @BeforeEach
     fun setUp() {
         url = "http://127.0.0.1:$port/v1/telegram/share?story-id={story-id}"
+
+        doReturn(shortenUrl).whenever(bitly).shorten(any(), any())
     }
 
     @Test
@@ -117,27 +124,6 @@ internal class ShareControllerTest {
         assertEquals(response.description, shares[0].errorMessage)
     }
 
-    fun `message is sent to telegram even if persistence error`() {
-        val site = createSite()
-        doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
-
-        val story = createStory()
-        doReturn(GetStoryResponse(story)).whenever(storyApi).get(123L)
-
-        val response = SendMessageResponse(
-            ok = false,
-            error_code = 1111,
-            description = "Yo man"
-        )
-        doReturn(response).whenever(telegramClient).sendMessage(any(), any(), any())
-
-        doThrow(RuntimeException::class).whenever(dao).save(any())
-
-        rest.getForEntity(url, Any::class.java, "123")
-
-        verify(telegramClient).sendMessage(any(), any(), any())
-    }
-
     @Test
     fun `send message to telegram when sharing story-id`() {
         val site = createSite()
@@ -148,7 +134,7 @@ internal class ShareControllerTest {
 
         rest.getForEntity(url, Any::class.java, "123")
 
-        val text = "${story.title} https://www.wutsi.com${story.slug}?utm_source=telegram"
+        val text = "${story.title} $shortenUrl"
         verify(telegramClient).sendMessage(text, "@test_channel", "000:111")
     }
 

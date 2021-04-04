@@ -24,6 +24,7 @@
     <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
     <jdk.version>11</jdk.version>
 
+    <bitly-api-client.version>0.8.0</bitly-api-client.version>
     <javax-validation.version>2.0.1.Final</javax-validation.version>
     <junit.version>5.6.0</junit.version>
     <kotlin.version>1.4.31</kotlin.version>
@@ -51,6 +52,11 @@
       <groupId>com.wutsi.story</groupId>
       <artifactId>story-sdk-kotlin</artifactId>
       <version>${wutsi-story-sdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.swisstech</groupId>
+      <artifactId>bitly-api-client</artifactId>
+      <version>${bitly-api-client.version}</version>
     </dependency>
 
     <dependency>

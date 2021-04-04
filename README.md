@@ -5,9 +5,13 @@
 [![](https://img.shields.io/badge/maven-3.6-brightgreen.svg)](https://maven.apache.org/download.cgi)
 ![](https://img.shields.io/badge/language-kotlin-blue.svg)
 
-API for sharing stories on Telegram.&#10;
+Wutsi Plugin for sharing stories on [Telegram](https://www.telegram.com).
 
 # Installation Prerequisites
+## Database Setup
+- Install postgres
+- Create account with username/password: `postgres`/`postgres`
+- Create a database named `telegram`
 
 ## Configure Github
 - Generate a Github token for accessing packages from GibHub
@@ -73,3 +77,13 @@ That's it... the API is up and running! Start sending requests :-)
 
 # Links
 - [API](https://wutsi.github.io/telegram-server/api/)
+
+# Plugin Site Configuration
+Here are the attributes required for this plugin to work with any site
+
+| Name | Description |
+|------|-------------|
+| urn:attribute:wutsi:telegram:enabled | REQUIRED - If `true`, then the plugin is enabled for the site |
+| urn:attribute:wutsi:telegram:token | REQUIRED - Telegram Token API access token |
+| urn:attribute:wutsi:telegram:chat-id | REQUIRED - Unique identifier for the target group or channel where messages will be shared |
+| urn:attribute:wutsi:bitly:access-token | If available, all URL shared will be shorted using Bitly service |

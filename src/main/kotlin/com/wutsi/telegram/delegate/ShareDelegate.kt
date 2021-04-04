@@ -7,8 +7,9 @@ import com.wutsi.story.dto.Story
 import com.wutsi.telegram.AttributeUrn
 import com.wutsi.telegram.dao.ShareRepository
 import com.wutsi.telegram.entity.ShareEntity
-import com.wutsi.telegram.t.SendMessageResponse
-import com.wutsi.telegram.t.TelegramClient
+import com.wutsi.telegram.service.bitly.BitlyUrlShortener
+import com.wutsi.telegram.service.t.SendMessageResponse
+import com.wutsi.telegram.service.t.TelegramClient
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -19,7 +20,8 @@ public class ShareDelegate(
     @Autowired private val siteApi: SiteApi,
     @Autowired private val storyApi: StoryApi,
     @Autowired private val telegram: TelegramClient,
-    @Autowired private val dao: ShareRepository
+    @Autowired private val dao: ShareRepository,
+    @Autowired private val bitly: BitlyUrlShortener
 ) {
     companion object {
         private val LOGGER = LoggerFactory.getLogger(ShareDelegate::class.java)
@@ -66,8 +68,10 @@ public class ShareDelegate(
         }
     }
 
-    private fun text(story: Story, site: Site): String =
-        "${story.title} ${site.websiteUrl}${story.slug}?utm_source=telegram"
+    private fun text(story: Story, site: Site): String {
+        val url = bitly.shorten("${site.websiteUrl}${story.slug}?utm_source=telegram", site)
+        return "${story.title} $url"
+    }
 
     private fun supportsTelegram(site: Site): Boolean =
         site.attributes.find { AttributeUrn.ENABLED.urn == it.urn }?.value == "true"

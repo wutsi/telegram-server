@@ -1,4 +1,4 @@
-package com.wutsi.telegram.t
+package com.wutsi.telegram.service.t
 
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
