@@ -167,7 +167,6 @@ internal class ShareControllerTest {
 
         rest.getForEntity(url, Any::class.java, "123")
 
-        val text = "${story.title} https://www.wutsi.com${story.slug}?utm_source=telegram"
         verify(telegramClient, never()).sendMessage(any(), any(), any())
     }
 
@@ -186,7 +185,6 @@ internal class ShareControllerTest {
 
         rest.getForEntity(url, Any::class.java, "123")
 
-        val text = "${story.title} https://www.wutsi.com${story.slug}?utm_source=telegram"
         verify(telegramClient, never()).sendMessage(any(), any(), any())
     }
 
@@ -205,7 +203,6 @@ internal class ShareControllerTest {
 
         rest.getForEntity(url, Any::class.java, "123")
 
-        val text = "${story.title} https://www.wutsi.com${story.slug}?utm_source=telegram"
         verify(telegramClient, never()).sendMessage(any(), any(), any())
     }
 

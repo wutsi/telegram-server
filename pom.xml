@@ -19,8 +19,8 @@
   </parent>
 
   <properties>
-    <jacoco.threshold.line>0.90</jacoco.threshold.line>
-    <jacoco.threshold.class>0.90</jacoco.threshold.class>
+    <jacoco.threshold.line>0.94</jacoco.threshold.line>
+    <jacoco.threshold.class>0.94</jacoco.threshold.class>
     <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
     <jdk.version>11</jdk.version>
 
@@ -35,11 +35,10 @@
     <hikari-cp.version>4.0.3</hikari-cp.version>
     <postgresql.version>42.2.19</postgresql.version>
     <flyway.version>7.7.0</flyway.version>
-    <wutsi-spring-memcached.version>1.1.0</wutsi-spring-memcached.version>
     <wutsi-stream-rabbitmq.version>1.0.0</wutsi-stream-rabbitmq.version>
 
     <wutsi-site-sdk.version>1.0.1</wutsi-site-sdk.version>
-    <wutsi-story-sdk.version>0.0.3</wutsi-story-sdk.version>
+    <wutsi-story-sdk.version>0.0.4</wutsi-story-sdk.version>
   </properties>
 
   <dependencies>
@@ -107,19 +106,6 @@
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
       <version>${flyway.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-cache</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.wutsi</groupId>
-      <artifactId>wutsi-spring-memcached</artifactId>
-      <version>${wutsi-spring-memcached.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
     <dependency>
       <groupId>com.wutsi</groupId>

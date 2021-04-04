@@ -8,7 +8,6 @@ java -jar ../wutsi-codegen/target/wutsi-codegen-0.0.24.jar server \
     -github_project telegram-server \
     -heroku wutsi-telegram \
     -service_database \
-    -service_cache \
     -service_logger \
     -service_mqueue
 
