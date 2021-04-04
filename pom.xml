@@ -166,12 +166,12 @@
     </repository>
 
     <repository>
-      <id>wutsi-site-server</id>
-      <url>https://maven.pkg.github.com/wutsi/site-server</url>
+      <id>wutsi-site-sdk-kotlin</id>
+      <url>https://maven.pkg.github.com/wutsi/site-sdk-kotlin</url>
     </repository>
     <repository>
-      <id>wutsi-story-server</id>
-      <url>https://maven.pkg.github.com/wutsi/story-server</url>
+      <id>wutsi-story-sdk-kotlin</id>
+      <url>https://maven.pkg.github.com/wutsi/story-sdk-kotlin</url>
     </repository>
   </repositories>
 

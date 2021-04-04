@@ -29,6 +29,16 @@ API for sharing stories on Telegram.&#10;
         <servers>
             ...
             <server>
+              <id>wutsi-site-sdk-kotlin</id>
+              <username>${env.GITUB_USER}</username>
+              <password>${env.GITHUB_TOKEN}</password>
+            </server>
+            <server>
+              <id>wutsi-story-sdk-kotlin</id>
+              <username>${env.GITUB_USER}</username>
+              <password>${env.GITHUB_TOKEN}</password>
+            </server>
+            <server>
               <id>wutsi-spring-memcached</id>
               <username>${env.GITUB_USER}</username>
               <password>${env.GITHUB_TOKEN}</password>

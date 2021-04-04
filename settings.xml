@@ -23,12 +23,12 @@
     </server>
 
     <server>
-      <id>wutsi-site-server</id>
+      <id>wutsi-site-sdk-kotlin</id>
       <username>wutsi</username>
       <password>${GITHUB_TOKEN}</password>
     </server>
     <server>
-      <id>wutsi-story-server</id>
+      <id>wutsi-story-sdk-kotlin</id>
       <username>wutsi</username>
       <password>${GITHUB_TOKEN}</password>
     </server>
