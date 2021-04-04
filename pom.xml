@@ -36,7 +36,7 @@
     <wutsi-stream-rabbitmq.version>1.0.0</wutsi-stream-rabbitmq.version>
 
     <wutsi-site-sdk.version>1.0.1</wutsi-site-sdk.version>
-    <wutsi-story-sdk.version>0.0.2</wutsi-story-sdk.version>
+    <wutsi-story-sdk.version>0.0.3</wutsi-story-sdk.version>
   </properties>
 
   <dependencies>
