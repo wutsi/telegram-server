@@ -1,10 +1,11 @@
 package com.wutsi.telegram
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.cache.`annotation`.EnableCaching
-import kotlin.String
+import org.springframework.cache.annotation.EnableCaching
+import org.springframework.transaction.annotation.EnableTransactionManagement
 
 @SpringBootApplication
+@EnableTransactionManagement
 @EnableCaching
 public class Application
 
