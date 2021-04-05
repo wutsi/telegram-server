@@ -45,6 +45,7 @@ public class ShareDelegate(
         val chatId = chatId(site)
         if (token != null && chatId != null) {
             val text = text(story, site)
+            LOGGER.info("Sharing to $chatId: $text")
             return telegram.sendMessage(text, chatId, token)
         }
         return null
