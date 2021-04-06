@@ -1,29 +1,29 @@
 openapi: 3.0.0
 info:
-  title: Wutsi Telegram API
-  description: |
-    API for sharing stories on Telegram.
-  version: 0.0.1
+    title: Wutsi Telegram API
+    description: |
+        API for sharing stories on Telegram.
+    version: 0.0.1
 servers:
-  - url: 'https://wutsi-telegram-test.herokuapp.com'
-    description: Sandbox
-  - url: 'https://wutsi-telegram-prod.herokuapp.com'
-    description: Sandbox
+    -   url: 'https://wutsi-telegram-test.herokuapp.com'
+        description: Sandbox
+    -   url: 'https://wutsi-telegram-prod.herokuapp.com'
+        description: Production
 paths:
-  /v1/telegram/share:
-    get:
-      operationId: share
-      summary: Share a Story on Telegram
-      parameters:
-        - in: query
-          name: story-id
-          description: ID of the story to share
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: Success
-      tags:
-        - Telegram
+    /v1/telegram/share:
+        get:
+            operationId: share
+            summary: Share a Story on Telegram
+            parameters:
+                -   in: query
+                    name: story-id
+                    description: ID of the story to share
+                    required: true
+                    schema:
+                        type: integer
+                        format: int64
+            responses:
+                '200':
+                    description: Success
+            tags:
+                - Telegram
