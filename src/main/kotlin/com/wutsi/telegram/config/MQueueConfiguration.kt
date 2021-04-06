@@ -12,5 +12,5 @@ class MQueueConfiguration(
     @Autowired private val stream: EventStream
 ) {
     @Bean
-    fun legacySubscription() = EventSubscription(StoryEventStream.LEGACY, stream)
+    fun storySubscription() = EventSubscription(StoryEventStream.NAME, stream)
 }

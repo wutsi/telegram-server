@@ -67,7 +67,7 @@ internal class ShareControllerTest {
 
     @Test
     @Sql(value = ["/db/clean.sql"])
-    fun `save message to telegram when sharing story-id`() {
+    fun `save message to DB when sharing story-id`() {
         val site = createSite()
         doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
 
@@ -97,7 +97,7 @@ internal class ShareControllerTest {
 
     @Test
     @Sql(value = ["/db/clean.sql"])
-    fun `save telegram error when sharing story-id`() {
+    fun `save telegram error to DB when sharing story-id`() {
         val site = createSite()
         doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
 
@@ -157,7 +157,7 @@ internal class ShareControllerTest {
     }
 
     @Test
-    fun `do not send message to telegram when token not enabled`() {
+    fun `do not send message to telegram when token not set`() {
         val site = createSite(
             attributes = listOf(
                 Attribute(AttributeUrn.CHAT_ID.urn, "@test_channel"),
@@ -175,7 +175,7 @@ internal class ShareControllerTest {
     }
 
     @Test
-    fun `do not send message to telegram when chat-id not available`() {
+    fun `do not send message to telegram when chat-id not set`() {
         val site = createSite(
             attributes = listOf(
                 Attribute(AttributeUrn.ENABLED.urn, "true"),
