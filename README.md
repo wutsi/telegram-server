@@ -47,11 +47,6 @@ This plugin listens to the following events:
               <password>${env.GITHUB_TOKEN}</password>
             </server>
             <server>
-              <id>wutsi-spring-memcached</id>
-              <username>${env.GITUB_USER}</username>
-              <password>${env.GITHUB_TOKEN}</password>
-            </server>
-            <server>
               <id>wutsi-stream-rabbitmq</id>
               <username>${env.GITUB_USER}</username>
               <password>${env.GITHUB_TOKEN}</password>
