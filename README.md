@@ -1,5 +1,4 @@
 [![](https://github.com/wutsi/telegram-server/actions/workflows/master.yml/badge.svg)](https://github.com/wutsi/telegram-server/actions/workflows/master.yml)
-[![](https://github.com/wutsi/telegram-server/actions/workflows/pull_request.yml/badge.svg)](https://github.com/wutsi/telegram-server/actions/workflows/pull_request.yml)
 [![](https://github.com/wutsi/telegram-server/actions/workflows/scheduled_run.yml/badge.svg)](https://github.com/wutsi/telegram-server/actions/workflows/scheduled_run.yml)
 
 [![JDK](https://img.shields.io/badge/jdk-11-brightgreen.svg)](https://jdk.java.net/11/)
@@ -7,9 +6,6 @@
 ![](https://img.shields.io/badge/language-kotlin-blue.svg)
 
 Wutsi Plugin for sharing stories on [Telegram](https://www.telegram.com).
-
-This plugin listens to the following events:
-  - `urn:event:wutsi:story:published`: When this event is received, this plugin share the story to the site's telegram channel or group.
 
 # Installation Prerequisites
 ## Database Setup
@@ -76,13 +72,5 @@ That's it... the API is up and running! Start sending requests :-)
 
 # Links
 - [API](https://wutsi.github.io/telegram-server/api/)
+- [Documentation](docs)
 
-#  Configuration Attributes
-Here are the Site configuration attributes used by this service:
-
-| Name | Description |
-|------|-------------|
-| urn:attribute:wutsi:telegram:enabled | If `true`, then the plugin is enabled for the site |
-| urn:attribute:wutsi:telegram:token | Telegram Token API access token |
-| urn:attribute:wutsi:telegram:chat-id | Unique identifier for the target group or channel where messages will be shared |
-| urn:attribute:wutsi:bitly:access-token | If available, all URL shared will be shorted using Bitly service |
