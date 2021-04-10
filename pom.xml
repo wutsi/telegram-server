@@ -24,7 +24,6 @@
     <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
     <jdk.version>11</jdk.version>
 
-    <bitly-api-client.version>0.8.0</bitly-api-client.version>
     <javax-validation.version>2.0.1.Final</javax-validation.version>
     <junit.version>5.6.0</junit.version>
     <kotlin.version>1.4.31</kotlin.version>
@@ -38,11 +37,17 @@
     <flyway.version>7.7.0</flyway.version>
     <wutsi-stream-rabbitmq.version>1.0.0</wutsi-stream-rabbitmq.version>
 
+    <wutsi-bitly.version>1.0.0</wutsi-bitly.version>
     <wutsi-site-sdk.version>1.1.0</wutsi-site-sdk.version>
     <wutsi-story-sdk.version>0.1.0</wutsi-story-sdk.version>
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>com.wutsi.bitly</groupId>
+      <artifactId>wutsi-bitly</artifactId>
+      <version>${wutsi-bitly.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.wutsi.site</groupId>
       <artifactId>site-sdk-kotlin</artifactId>
@@ -52,11 +57,6 @@
       <groupId>com.wutsi.story</groupId>
       <artifactId>story-sdk-kotlin</artifactId>
       <version>${wutsi-story-sdk.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>net.swisstech</groupId>
-      <artifactId>bitly-api-client</artifactId>
-      <version>${bitly-api-client.version}</version>
     </dependency>
 
     <dependency>

@@ -2,9 +2,11 @@ package com.wutsi.telegram.endpoint
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import com.wutsi.bitly.BitlyUrlShortener
 import com.wutsi.site.SiteApi
 import com.wutsi.site.dto.Attribute
 import com.wutsi.site.dto.GetSiteResponse
@@ -14,7 +16,7 @@ import com.wutsi.story.dto.GetStoryResponse
 import com.wutsi.story.dto.Story
 import com.wutsi.telegram.AttributeUrn
 import com.wutsi.telegram.dao.ShareRepository
-import com.wutsi.telegram.service.bitly.BitlyUrlShortener
+import com.wutsi.telegram.service.bitly.BitlyUrlShortenerFactory
 import com.wutsi.telegram.service.t.Message
 import com.wutsi.telegram.service.t.SendMessageResponse
 import com.wutsi.telegram.service.t.TelegramClient
@@ -54,7 +56,7 @@ internal class ShareControllerTest {
     private lateinit var telegramClient: TelegramClient
 
     @MockBean
-    private lateinit var bitly: BitlyUrlShortener
+    private lateinit var bitlyFactory: BitlyUrlShortenerFactory
 
     private val shortenUrl = "https://bit.ly/123"
 
@@ -62,7 +64,9 @@ internal class ShareControllerTest {
     fun setUp() {
         url = "http://127.0.0.1:$port/v1/telegram/share?story-id={story-id}"
 
-        doReturn(shortenUrl).whenever(bitly).shorten(any(), any())
+        val bitly = mock<BitlyUrlShortener>()
+        doReturn(shortenUrl).whenever(bitly).shorten(any())
+        doReturn(bitly).whenever(bitlyFactory).get(any())
     }
 
     @Test
