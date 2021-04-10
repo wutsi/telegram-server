@@ -16,7 +16,7 @@ java -jar ${CODEGEN_JAR} server \
     -jdk 11 \
     -github_user ${GITHUB_USER} \
     -github_project ${API_NAME}-sdk-kotlin \
-    -heroku ${API_NAME}-site \
+    -heroku wutsi-${API_NAME} \
     -service_logger \
     -service_database \
     -service_mqueue
