@@ -40,7 +40,7 @@ jobs:
       - name: Heroku-Deploy-Test
         env:
           HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY_TEST}}
-          HEROKU_APP: telegram-site-test
+          HEROKU_APP: wutsi-telegram-test
         run: |
           heroku apps | grep ${HEROKU_APP} && echo 'app: ${HEROKU_APP} exists' ||  heroku apps:create ${HEROKU_APP}
           heroku buildpacks:clear --app ${HEROKU_APP}
@@ -56,7 +56,7 @@ jobs:
       - name: Heroku-Deploy-Prod
         env:
           HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY_PROD}}
-          HEROKU_APP: telegram-site-prod
+          HEROKU_APP: wutsi-telegram-prod
         run: |
           heroku apps | grep ${HEROKU_APP} && echo 'app: ${HEROKU_APP} exists' ||  heroku apps:create ${HEROKU_APP}
           heroku buildpacks:clear --app ${HEROKU_APP}
