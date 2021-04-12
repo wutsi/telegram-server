@@ -1,6 +1,5 @@
 package com.wutsi.telegram.config
 
-import com.wutsi.tracing.DynamicTracingContext
 import com.wutsi.tracing.TracingContext
 import feign.RequestInterceptor
 import org.springframework.beans.factory.`annotation`.Autowired
@@ -18,7 +17,7 @@ public class TracingConfiguration(
     public fun tracingFilter(): Filter = com.wutsi.tracing.TracingFilter(tracingContext())
 
     @Bean
-    public fun tracingContext(): TracingContext = DynamicTracingContext(context)
+    public fun tracingContext(): TracingContext = com.wutsi.tracing.DynamicTracingContext(context)
 
     @Bean
     public fun tracingRequestInterceptor(): RequestInterceptor =
