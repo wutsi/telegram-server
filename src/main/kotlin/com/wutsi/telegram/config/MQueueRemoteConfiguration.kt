@@ -3,16 +3,16 @@ package com.wutsi.telegram.config
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.ConnectionFactory
 import com.wutsi.stream.rabbitmq.RabbitMQEventStream
-import org.springframework.beans.factory.`annotation`.Autowired
-import org.springframework.beans.factory.`annotation`.Value
+import com.wutsi.tracing.TracingContext
+import com.wutsi.tracing.TracingMDCHelper
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.actuate.health.HealthIndicator
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.ApplicationEventPublisher
-import org.springframework.context.`annotation`.Bean
-import org.springframework.context.`annotation`.Configuration
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import java.util.concurrent.ExecutorService
-import kotlin.Int
-import kotlin.String
 
 @Configuration
 @ConditionalOnProperty(
@@ -20,6 +20,8 @@ import kotlin.String
     havingValue = "true"
 )
 public class MQueueRemoteConfiguration(
+    @Autowired
+    private val tracingContext: TracingContext,
     @Autowired
     private val eventPublisher: ApplicationEventPublisher,
     @Value(value = "\${rabbitmq.url}")
@@ -49,6 +51,7 @@ public class MQueueRemoteConfiguration(
         channel = channel(),
         handler = object : com.wutsi.stream.EventHandler {
             override fun onEvent(event: com.wutsi.stream.Event) {
+                TracingMDCHelper.initMDC(tracingContext)
                 eventPublisher.publishEvent(event)
             }
         }
