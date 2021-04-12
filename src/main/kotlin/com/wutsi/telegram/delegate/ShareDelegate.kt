@@ -4,7 +4,7 @@ import com.wutsi.site.SiteApi
 import com.wutsi.site.dto.Site
 import com.wutsi.story.StoryApi
 import com.wutsi.story.dto.Story
-import com.wutsi.telegram.AttributeUrn
+import com.wutsi.telegram.SiteAttribute
 import com.wutsi.telegram.dao.ShareRepository
 import com.wutsi.telegram.entity.ShareEntity
 import com.wutsi.telegram.service.bitly.BitlyUrlShortenerFactory
@@ -78,11 +78,11 @@ public class ShareDelegate(
         bitly.get(site).shorten("${site.websiteUrl}${story.slug}?utm_source=twitter")
 
     private fun supportsTelegram(site: Site): Boolean =
-        site.attributes.find { AttributeUrn.ENABLED.urn == it.urn }?.value == "true"
+        site.attributes.find { SiteAttribute.ENABLED.urn == it.urn }?.value == "true"
 
     private fun chatId(site: Site): String? =
-        site.attributes.find { AttributeUrn.CHAT_ID.urn == it.urn }?.value
+        site.attributes.find { SiteAttribute.CHAT_ID.urn == it.urn }?.value
 
     private fun token(site: Site): String? =
-        site.attributes.find { AttributeUrn.TOKEN.urn == it.urn }?.value
+        site.attributes.find { SiteAttribute.TOKEN.urn == it.urn }?.value
 }
