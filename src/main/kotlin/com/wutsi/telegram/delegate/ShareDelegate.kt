@@ -31,12 +31,18 @@ public class ShareDelegate(
     public fun invoke(storyId: Long) {
         val story = storyApi.get(storyId).story
         val site = siteApi.get(story.siteId).site
-        if (!supportsTelegram(site))
+        if (!supportsTelegram(site)) {
+            LOGGER.warn("Site#${story.siteId} doesn't have Telegram enabled")
             return
+        }
 
-        val response = share(story, site)
-        if (response != null) {
-            save(story, site, response)
+        try {
+            val response = share(story, site)
+            if (response != null) {
+                save(story, site, response)
+            }
+        } catch (ex: Exception) {
+            save(story, site, ex)
         }
     }
 
@@ -47,8 +53,32 @@ public class ShareDelegate(
             val text = text(story, site)
             LOGGER.info("Sharing to $chatId: $text")
             return telegram.sendMessage(text, chatId, token)
+        } else {
+            LOGGER.warn("Site#${story.siteId} doesn't have Telegram chatId or token configured")
+            return null
         }
-        return null
+    }
+
+    private fun save(
+        story: Story,
+        site: Site,
+        ex: Exception
+    ) {
+        try {
+            dao.save(
+                ShareEntity(
+                    storyId = story.id,
+                    siteId = site.id,
+                    telegramChatId = chatId(site) ?: "-",
+                    telegramMessageId = null,
+                    success = false,
+                    errorCode = -1,
+                    errorMessage = ex.message,
+                )
+            )
+        } catch (ex: Exception) {
+            LOGGER.warn("Unable to store the share information", ex)
+        }
     }
 
     private fun save(story: Story, site: Site, response: SendMessageResponse) {

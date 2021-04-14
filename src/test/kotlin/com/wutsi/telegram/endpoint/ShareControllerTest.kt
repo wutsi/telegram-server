@@ -2,6 +2,7 @@ package com.wutsi.telegram.endpoint
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.verify
@@ -126,6 +127,30 @@ internal class ShareControllerTest {
         assertFalse(shares[0].success)
         assertEquals(response.error_code, shares[0].errorCode)
         assertEquals(response.description, shares[0].errorMessage)
+    }
+
+    @Test
+    @Sql(value = ["/db/clean.sql"])
+    fun `save telegram exception to DB when sharing story-id`() {
+        val site = createSite()
+        doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
+
+        val story = createStory()
+        doReturn(GetStoryResponse(story)).whenever(storyApi).get(123L)
+
+        doThrow(IllegalStateException("ouups")).whenever(telegramClient).sendMessage(any(), any(), any())
+
+        rest.getForEntity(url, Any::class.java, "123")
+
+        val shares = dao.findAll().toList()
+        assertEquals(1, shares.size)
+        assertNull(shares[0].telegramMessageId)
+        assertEquals(story.id, shares[0].storyId)
+        assertEquals(site.id, shares[0].siteId)
+        assertEquals("@test_channel", shares[0].telegramChatId)
+        assertFalse(shares[0].success)
+        assertEquals(-1, shares[0].errorCode)
+        assertEquals("ouups", shares[0].errorMessage)
     }
 
     @Test
