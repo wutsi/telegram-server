@@ -8,7 +8,7 @@ servers:
   - url: 'https://wutsi-telegram-test.herokuapp.com'
     description: Sandbox
   - url: 'https://wutsi-telegram-prod.herokuapp.com'
-    description: Sandbox
+    description: Production
 paths:
   /v1/telegram/share:
     get:
