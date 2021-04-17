@@ -20,11 +20,13 @@ class EventHandler(
 
     @EventListener
     fun onEvent(event: Event) {
-        LOGGER.info("onEvent($event)")
+        LOGGER.info("onEvent(${event.type}, ...)")
 
         if (event.type == StoryEventType.PUBLISHED.urn) {
             val payload = ObjectMapperBuilder().build().readValue(event.payload, StoryEventPayload::class.java)
             shareDelegate.invoke(payload.storyId)
+        } else {
+            LOGGER.info("Event ignored")
         }
     }
 }
