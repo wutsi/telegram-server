@@ -2,7 +2,7 @@
 
 | Name | Description |
 |------|-------------|
-| `telegram` | Use this scope sharing stories via a Telegram |
+| `telegram` | share stories via a Telegram |
 
 
 
