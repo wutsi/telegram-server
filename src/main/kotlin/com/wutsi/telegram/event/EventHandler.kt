@@ -3,7 +3,6 @@ package com.wutsi.telegram.event
 import com.wutsi.story.event.StoryEventPayload
 import com.wutsi.story.event.StoryEventType
 import com.wutsi.stream.Event
-import com.wutsi.stream.ObjectMapperBuilder
 import com.wutsi.telegram.delegate.ShareDelegate
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +22,7 @@ class EventHandler(
         LOGGER.info("onEvent(${event.type}, ...)")
 
         if (event.type == StoryEventType.PUBLISHED.urn) {
-            val payload = ObjectMapperBuilder().build().readValue(event.payload, StoryEventPayload::class.java)
+            val payload = event.payloadAs(StoryEventPayload::class.java)
             shareDelegate.invoke(payload.storyId)
         } else {
             LOGGER.info("Event ignored")
