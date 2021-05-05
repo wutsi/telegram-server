@@ -36,7 +36,7 @@
     <postgresql.version>42.2.20</postgresql.version>
     <flyway.version>7.8.2</flyway.version>
 
-    <wutsi-tracing.version>1.2.0</wutsi-tracing.version>
+    <wutsi-tracing.version>1.3.0</wutsi-tracing.version>
     <wutsi-stream-rabbitmq.version>1.5.0</wutsi-stream-rabbitmq.version>
     <wutsi-bitly.version>1.1.0</wutsi-bitly.version>
     <wutsi-security.version>1.0.0</wutsi-security.version>
