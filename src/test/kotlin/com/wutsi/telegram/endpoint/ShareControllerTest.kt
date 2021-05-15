@@ -9,13 +9,13 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import com.wutsi.bitly.BitlyUrlShortener
 import com.wutsi.site.SiteApi
+import com.wutsi.site.SiteAttribute
 import com.wutsi.site.dto.Attribute
 import com.wutsi.site.dto.GetSiteResponse
 import com.wutsi.site.dto.Site
 import com.wutsi.story.StoryApi
 import com.wutsi.story.dto.GetStoryResponse
 import com.wutsi.story.dto.Story
-import com.wutsi.telegram.SiteAttribute
 import com.wutsi.telegram.dao.ShareRepository
 import com.wutsi.telegram.service.bitly.BitlyUrlShortenerFactory
 import com.wutsi.telegram.service.t.Message
@@ -172,8 +172,8 @@ internal class ShareControllerTest : ControllerTestBase() {
     fun `do not send message to telegram when telegram not enabled`() {
         val site = createSite(
             attributes = listOf(
-                Attribute(SiteAttribute.CHAT_ID.urn, "@test_channel"),
-                Attribute(SiteAttribute.TOKEN.urn, "000:111")
+                Attribute(SiteAttribute.TELEGRAM_CHAT_ID.urn, "@test_channel"),
+                Attribute(SiteAttribute.TELEGRAM_TOKEN.urn, "000:111")
             )
         )
         doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
@@ -191,8 +191,8 @@ internal class ShareControllerTest : ControllerTestBase() {
     fun `do not send message to telegram when token not set`() {
         val site = createSite(
             attributes = listOf(
-                Attribute(SiteAttribute.CHAT_ID.urn, "@test_channel"),
-                Attribute(SiteAttribute.ENABLED.urn, "true")
+                Attribute(SiteAttribute.TELEGRAM_CHAT_ID.urn, "@test_channel"),
+                Attribute(SiteAttribute.TELEGRAM_ENABLED.urn, "true")
             )
         )
         doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
@@ -210,8 +210,8 @@ internal class ShareControllerTest : ControllerTestBase() {
     fun `do not send message to telegram when chat-id not set`() {
         val site = createSite(
             attributes = listOf(
-                Attribute(SiteAttribute.ENABLED.urn, "true"),
-                Attribute(SiteAttribute.TOKEN.urn, "000:111")
+                Attribute(SiteAttribute.TELEGRAM_ENABLED.urn, "true"),
+                Attribute(SiteAttribute.TELEGRAM_TOKEN.urn, "000:111")
             )
         )
         doReturn(GetSiteResponse(site)).whenever(siteApi).get(1L)
@@ -233,9 +233,9 @@ internal class ShareControllerTest : ControllerTestBase() {
 
     private fun createSite(
         attributes: List<Attribute> = listOf(
-            Attribute(SiteAttribute.ENABLED.urn, "true"),
-            Attribute(SiteAttribute.CHAT_ID.urn, "@test_channel"),
-            Attribute(SiteAttribute.TOKEN.urn, "000:111")
+            Attribute(SiteAttribute.TELEGRAM_ENABLED.urn, "true"),
+            Attribute(SiteAttribute.TELEGRAM_CHAT_ID.urn, "@test_channel"),
+            Attribute(SiteAttribute.TELEGRAM_TOKEN.urn, "000:111")
         )
     ) = Site(
         id = 1L,
